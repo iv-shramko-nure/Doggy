@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col">
+          <h1>Registering a shelter</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <h5>Main Information</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="descriptionForm" (ngSubmit)="onSubmit()" class="description-form">
+                <label for="name">Name of shelter</label>
+                <input name="name" formControlName="name" type="text" placeholder="Type name here...">
+                <label for="address">Shelter Address</label>
+                <input name="address" formControlName="address" type="phone" placeholder="Type name here...">
+                <label for="description">Short Description</label>
+                <textarea name="description" formControlName="description" placeholder="Type name here..." cols="30"
+                  rows="10"></textarea>
+                <div class="row">
+                  <div class="col-6">
+                    <button routerLink="../" type="reset">Previous step</button>
+                  </div>
+                  <div class="col-6">
+                    <button type="submit" [disabled]="!descriptionForm.valid">Next step</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="" alt="">
+    </div>
+  </div>
+</div>
