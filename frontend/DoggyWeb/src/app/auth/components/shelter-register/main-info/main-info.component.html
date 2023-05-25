@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col">
+          <h1>Registering a shelter</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <h5>Main Information</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="mainInfoForm" (ngSubmit)="onSubmit()" class="main-info-form">
+                <label for="email">Email</label>
+                <input name="email" formControlName="email" type="text" placeholder="Type name here...">
+                <label for="phoneNumber">Shelter contact number</label>
+                <input name="phoneNumber" formControlName="phoneNumber" type="phone" placeholder="Type name here...">
+                <label for="website">Website link(optional)</label>
+                <input name="website" formControlName="website" type="text" placeholder="Type name here...">
+                <label for="password">Password</label>
+                <input name="password" formControlName="password" type="password" placeholder="Type name here...">
+                <label for="confirmPassword">Repeat password</label>
+                <input name="confirmPassword" formControlName="confirmPassword" type="password"
+                  placeholder="Type name here...">
+                <div class="row">
+                  <div class="col-6">
+                    <button type="reset">Back to menu</button>
+                  </div>
+                  <div class="col-6">
+                    <button type="submit" [disabled]="!mainInfoForm.valid">Next step</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="" alt="">
+    </div>
+  </div>
+</div>
