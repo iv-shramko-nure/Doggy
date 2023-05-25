@@ -48,15 +48,30 @@
             <input name="phoneNumber" formControlName="phoneNumber" type="phone" placeholder="Type name here...">
             <label for="password">Password</label>
             <input name="password" formControlName="password" type="password" placeholder="Type name here...">
-            <button [disabled]="!registerForm.valid" type="submit">Log in</button>
+            <div>
+              <input formControlName="termsAndPolicies" type="checkbox" name="termsAndPolicies">
+              <label for="termsAndPolicies">
+                I agree with
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank">Terms and Policies</a>
+              </label>
+            </div>
+            <button [disabled]="!registerForm.valid" type="submit">Sign up</button>
           </form>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <p>
-            Dont't have an account?
-            <a routerLink="../register">Sign-up</a>
+            Already have an account?
+            <a routerLink="../login">Login</a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>
+            Want to register a shelter?
+            <a routerLink="../register">Register a shelter</a>
           </p>
         </div>
       </div>

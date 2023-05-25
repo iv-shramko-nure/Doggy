@@ -49,6 +49,10 @@ export class RegisterComponent implements OnInit {
       password: [
         null,
         [Validators.required]
+      ],
+      termsAndPolicies: [
+        false,
+        [Validators.requiredTrue]
       ]
     });
   }
