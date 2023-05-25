@@ -34,9 +34,9 @@
           <hr>
         </div>
       </div>
-      <div [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row">
+      <div class="row">
         <div class="col">
-          <form class="login-form">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
             <label for="email">Email</label>
             <input name="email" formControlName="email" type="text" placeholder="Type name here...">
             <label for="password">Password</label>

@@ -1,1 +1,68 @@
-<p>register works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-1">
+          <span>arrow</span>
+        </div>
+        <div class="col-11 text-right">
+          <h1>Create an Account</h1>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Few steps before getting new paw-pal</h3>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <button>Log in with google</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button>Log in with apple</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <hr>
+        </div>
+        <div class="col-2 text-center">
+          <p>or</p>
+        </div>
+        <div class="col-5">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+            <label for="fullName">Name and surname</label>
+            <input name="fullName" formControlName="fullName" type="text" placeholder="Type name here...">
+            <label for="email">Email</label>
+            <input name="email" formControlName="email" type="text" placeholder="Type name here...">
+            <label for="phoneNumber">Phone Number</label>
+            <input name="phoneNumber" formControlName="phoneNumber" type="phone" placeholder="Type name here...">
+            <label for="password">Password</label>
+            <input name="password" formControlName="password" type="password" placeholder="Type name here...">
+            <button [disabled]="!registerForm.valid" type="submit">Log in</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>
+            Dont't have an account?
+            <a routerLink="../register">Sign-up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="" alt="">
+    </div>
+  </div>
+</div>
