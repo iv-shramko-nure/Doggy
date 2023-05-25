@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col">
+          <h1>Registering a shelter</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <h5>Legal Information</h5>
+            </div>
+            <div class="col">
+              <h5>Step 3 of 3</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+            <div class="col-4">
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="legalInfoForm" (ngSubmit)="onSubmit()" class="legal-info-form">
+                <label for="accountNumber">Bank account number(for donations)</label>
+                <input name="accountNumber" formControlName="accountNumber" type="text" placeholder="Type name here...">
+                <label for="payPalEmail">PayPal email(optional)</label>
+                <input name="payPalEmail" formControlName="payPalEmail" type="phone" placeholder="Type name here...">
+                <div>
+                  <input formControlName="termsAndPolicies" type="checkbox" name="termsAndPolicies">
+                  <label for="termsAndPolicies">
+                    I agree with
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank">Terms
+                      and Policies</a>
+                  </label>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button routerLink="../description" type="reset">Previous step</button>
+                  </div>
+                  <div class="col-6">
+                    <button type="submit" [disabled]="!legalInfoForm.valid">Sign up</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <img src="" alt="">
+    </div>
+  </div>
+</div>
