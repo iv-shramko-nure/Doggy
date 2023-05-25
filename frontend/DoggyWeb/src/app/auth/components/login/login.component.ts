@@ -22,16 +22,16 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     this.authApiService.login(
-      this.loginForm.controls['login'].value,
+      this.loginForm.controls['email'].value,
       this.loginForm.controls['password'].value
     ).subscribe();
   }
 
   private initForm() {
     this.loginForm = this.fb.group({
-      login: [
+      email: [
         null,
-        [Validators.required]
+        [Validators.required, Validators.pattern('^[0-9A-Za-z-\.]+@([0-9A-Za-z-]+\.)+[0-9A-Za-z-]+$')]
       ],
       password: [
         null,
