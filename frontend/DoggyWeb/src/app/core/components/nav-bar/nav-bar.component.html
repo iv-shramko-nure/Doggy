@@ -10,9 +10,15 @@
       <a href="">Shelters</a>
       <a href="">Forum</a>
     </div>
-    <div class="col-4">
+    <div class="col-4" *ngIf="!isAuthenticated">
       <button>Log in</button>
       <button>Sign up</button>
+    </div>
+    <div class="col-4" *ngIf="isAuthenticated">
+      <button routerLink="profile">
+        <span>{{fullName}}</span>
+        <img src="../../../../assets/icons/user.svg" alt="">
+      </button>
     </div>
   </div>
 </div>

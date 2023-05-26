@@ -9,7 +9,11 @@ export class NavBarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  public isAuthenticated: boolean = true;
+
+  public fullName: string = 'Ivan Shramko';
+
+  public ngOnInit(): void {
   }
 
 }

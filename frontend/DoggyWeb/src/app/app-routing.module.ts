@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomePageComponent
+    loadChildren: () => import('../app/core/core-routing.module').then(m => m.CoreRoutingModule)
   },
   {
     path: '**',
