@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { confirmPasswordValidatorFn } from 'src/app/auth/components/shelter-register/helpers';
+import { confirmPasswordValidatorFn } from 'src/app/shared/helpers';
 
 @Component({
   selector: 'app-main-info',

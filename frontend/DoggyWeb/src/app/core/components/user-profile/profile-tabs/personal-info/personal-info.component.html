@@ -1,1 +1,40 @@
-<p>personal-info works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col-4">
+          <!-- profile pic -->
+        </div>
+        <div class="col-8">
+          <h3>{{fullName}}</h3>
+          <h4>{{email}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+            <div class="row">
+              <div class="col-6 d-flex flex-column">
+                <label for="fullName">Full Name</label>
+                <input formControlName="fullName" name="fullName" type="text">
+                <label for="phone">Phone</label>
+                <input formControlName="phone" name="phone" type="text">
+              </div>
+              <div class="col-6 d-flex flex-column">
+                <label for="email">Email</label>
+                <input formControlName="email" name="email" type="text">
+                <label for="address">Address</label>
+                <input formControlName="address" name="address" type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <button type="submit">Save Changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

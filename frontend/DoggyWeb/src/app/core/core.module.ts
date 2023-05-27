@@ -11,6 +11,7 @@ import { PublishedPetsComponent } from './components/user-profile/profile-tabs/p
 import { AccountSecurityComponent } from './components/user-profile/profile-tabs/account-security/account-security.component';
 import { LikedPetsComponent } from './components/user-profile/profile-tabs/liked-pets/liked-pets.component';
 import { PostNewPetComponent } from './components/user-profile/profile-tabs/post-new-pet/post-new-pet.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,7 +30,9 @@ import { PostNewPetComponent } from './components/user-profile/profile-tabs/post
   imports: [
     CommonModule,
     RouterModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     NavBarComponent,

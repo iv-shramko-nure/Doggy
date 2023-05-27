@@ -1,1 +1,31 @@
-<p>post-new-pet works!</p>
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <div class="col-6">
+        <!-- photo input -->
+      </div>
+      <div class="col-6">
+        <form [formGroup]="postPetForm" (ngSubmit)="onPostpet()" class="post-pet-form">
+          <label for="petName">Pets's name</label>
+          <input formControlName="petName" name="petName" type="text">
+          <label for="description">Short description</label>
+          <textarea formControlName="description" name="description" cols="30" rows="10">
+          </textarea>
+          <label for="petCategory">Pet Category</label>
+          <select formControlName="petCategory" name="petCategory">
+            <option value="0">Get pets categories from db????</option>
+          </select>
+          <div>
+            <input formControlName="termsAndPolicies" type="checkbox" name="termsAndPolicies">
+            <label for="termsAndPolicies">
+              I agree with
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank">Terms and
+                Policies</a>
+            </label>
+          </div>
+          <button type="submit" [disabled]="!postPetForm.valid">Post a pet</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

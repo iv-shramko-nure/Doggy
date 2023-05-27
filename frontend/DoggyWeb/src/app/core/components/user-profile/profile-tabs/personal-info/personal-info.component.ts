@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-personal-info',
@@ -7,9 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
-  ngOnInit(): void {
+  public fullName: string = 'Ivan Shramko'
+  public email: string = 'ffff@gggg.com'
+
+  public profileForm!: FormGroup;
+
+  public ngOnInit(): void {
+    this.initForm();
+  }
+
+  public updateProfile() { }
+
+  private initForm() {
+    this.profileForm = this.fb.group({
+      fullName: [
+        null,
+        Validators.required
+      ],
+      phone: [
+        null,
+        Validators.required
+      ],
+      email: [
+        null,
+        Validators.required
+      ],
+      address: [
+        null,
+        Validators.required
+      ]
+    });
   }
 
 }
