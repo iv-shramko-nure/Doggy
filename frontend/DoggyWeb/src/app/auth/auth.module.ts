@@ -4,10 +4,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule } from "@angular/common/http";
-import { ReactiveFormsModule } from '@angular/forms';
-import { MainInfoComponent } from './components/shelter-register/main-info/main-info.component';
-import { DescriptionComponent } from './components/shelter-register/description/description.component';
-import { LegalInfoComponent } from './components/shelter-register/legal-info/legal-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainInfoComponent } from 'src/app/auth/components/shelter-register/main-info/main-info.component';
+import { DescriptionComponent } from 'src/app/auth/components/shelter-register/description/description.component';
+import { LegalInfoComponent } from 'src/app/auth/components/shelter-register/legal-info/legal-info.component';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { LegalInfoComponent } from './components/shelter-register/legal-info/leg
     CommonModule,
     AuthRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

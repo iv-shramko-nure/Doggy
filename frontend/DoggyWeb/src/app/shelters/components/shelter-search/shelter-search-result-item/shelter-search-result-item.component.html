@@ -1,0 +1,32 @@
+<div class="container shelter-item">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <img class="shelter-item-img" src="https://picsum.photos/350/220" alt="">
+      </div>
+      <div class="row">
+        <div class="col-7">{{model?.name}}</div>
+        <div class="col-5">
+          <app-rating [value]="model?.rating || 0"></app-rating>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Address</p>
+          <p>{{model?.address}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Info</p>
+          <p>{{model?.description}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button>See more</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.shelter-item {
+  border: 2px solid var(--black, #000);
+  border-radius: 8px;
+  padding: 1.5em;
+}
+
+.shelter-item-img {
+  border-radius: 8px;
+}
