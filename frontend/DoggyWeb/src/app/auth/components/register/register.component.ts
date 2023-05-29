@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterData } from 'src/app/auth/models';
 import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private router: Router
   ) { }
 
   public registerForm!: FormGroup;
@@ -29,7 +31,11 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.get('password')?.value
     }
 
-    this.authApiService.register(registerData).subscribe();
+    this.authApiService.register(registerData).subscribe(response => {
+      if (response.isSuccess) {
+        this.router.navigate(['auth/login/']);
+      }
+    });
   }
 
   private initForm() {

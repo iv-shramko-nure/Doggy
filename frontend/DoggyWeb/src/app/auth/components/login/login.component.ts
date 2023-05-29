@@ -1,6 +1,7 @@
 import { AuthApiService } from './../../services/auth-api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authApiService: AuthApiService
+    private authApiService: AuthApiService,
+    private router: Router
   ) { }
 
   public loginForm!: FormGroup;
@@ -21,10 +23,16 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.authApiService.login(
-      this.loginForm.controls['email'].value,
-      this.loginForm.controls['password'].value
-    ).subscribe();
+    this.authApiService
+      .login(
+        this.loginForm.controls['email'].value,
+        this.loginForm.controls['password'].value
+      )
+      .subscribe(response => {
+        if (response.isSuccess) {
+          this.router.navigateByUrl('/');
+        }
+      });
   }
 
   private initForm() {
