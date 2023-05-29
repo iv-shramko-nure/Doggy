@@ -2,6 +2,7 @@ import { AuthApiService } from './../../services/auth-api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthManagerService } from 'src/app/auth/services/auth-manager.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authApiService: AuthApiService,
+    private authManagerService: AuthManagerService,
     private router: Router
   ) { }
 
@@ -23,13 +24,13 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.authApiService
+    this.authManagerService
       .login(
         this.loginForm.controls['email'].value,
         this.loginForm.controls['password'].value
       )
-      .subscribe(response => {
-        if (response.isSuccess) {
+      .subscribe(result => {
+        if (result) {
           this.router.navigateByUrl('/');
         }
       });
