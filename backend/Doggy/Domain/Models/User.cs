@@ -26,6 +26,9 @@ namespace Domain.Models
         [Required]
         public string Salt { get; set; }
 
+        [Required]
+        public int LocationId { get; set; }
+
         #region Relations
 
         [JsonIgnore]
@@ -36,6 +39,9 @@ namespace Domain.Models
 
         [JsonIgnore]
         public List<Like> Likes { get; set; }
+
+        [JsonIgnore]
+        public Location Location { get; set; }
 
         #endregion
     }
