@@ -27,7 +27,7 @@ namespace Web
             services.AddDbContext<AppDBContext>(config =>
             {
                 config.UseSqlServer(
-                    Configuration.GetConnectionString("DatingConnection"));
+                    Configuration.GetConnectionString("SqlServerDBConnection"));
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
