@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="row">
-      <div class="col-6">
-        <app-file-upload [params]="fileUploadParams"></app-file-upload>
-      </div>
-      <div class="col-6">
-        <form [formGroup]="postPetForm" (ngSubmit)="onPostpet()" class="post-pet-form">
+    <div class="col">
+      <form [formGroup]="postPetForm" (ngSubmit)="onPostpet()" class="row">
+        <div class="col-6">
+          <app-file-upload [params]="fileUploadParams"></app-file-upload>
+        </div>
+        <div class="col-6 d-flex flex-column">
           <label for="petName">Pets's name</label>
           <input formControlName="petName" name="petName" type="text">
           <label for="description">Short description</label>
@@ -24,8 +24,8 @@
             </label>
           </div>
           <button type="submit" [disabled]="!postPetForm.valid">Post a pet</button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

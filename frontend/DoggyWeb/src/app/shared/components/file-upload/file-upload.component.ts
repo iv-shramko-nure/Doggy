@@ -6,7 +6,7 @@ import { FileUploadComponentParams } from 'src/app/shared/components/file-upload
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
-export class FileUploadComponent implements OnInit, OnChanges {
+export class FileUploadComponent implements OnInit {
 
   constructor() { }
 
@@ -15,9 +15,6 @@ export class FileUploadComponent implements OnInit, OnChanges {
   @Input() params!: FileUploadComponentParams;
   @ViewChild('input') inputRef!: ElementRef<HTMLInputElement>;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-  }
   public ngOnInit(): void {
   }
 

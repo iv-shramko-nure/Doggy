@@ -10,4 +10,5 @@ export interface FileUploadComponentParams {
 
 export enum AllowedFileTypes {
   Images = 'image/*',
+  Any = '*'
 }

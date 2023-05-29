@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainInfoComponent } from 'src/app/auth/components/shelter-register/main-info/main-info.component';
 import { DescriptionComponent } from 'src/app/auth/components/shelter-register/description/description.component';
 import { LegalInfoComponent } from 'src/app/auth/components/shelter-register/legal-info/legal-info.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LegalInfoComponent } from 'src/app/auth/components/shelter-register/leg
     CommonModule,
     AuthRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AuthModule { }
