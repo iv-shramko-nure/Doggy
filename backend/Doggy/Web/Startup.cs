@@ -1,10 +1,15 @@
 using Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Web
 {
@@ -19,7 +24,52 @@ namespace Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDBContext>();
+            services.AddDbContext<AppDBContext>(config =>
+            {
+                config.UseSqlServer(
+                    Configuration.GetConnectionString("DatingConnection"));
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+            })
+            .AddEntityFrameworkStores<AppDBContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddAuthentication(config =>
+            {
+                config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(config =>
+            {
+                var secretBytes = Encoding.UTF8.GetBytes(
+                    Configuration.GetSection("Constants")["Secret"]);
+
+                var key = new SymmetricSecurityKey(secretBytes);
+
+                config.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = Configuration.GetSection("Constants")["Issuer"],
+                    ValidAudience = Configuration.GetSection("Constants")["Audiance"],
+                    IssuerSigningKey = key
+                };
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -36,6 +86,8 @@ namespace Web
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
 
