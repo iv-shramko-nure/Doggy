@@ -12,6 +12,8 @@ import { AccountSecurityComponent } from './components/user-profile/profile-tabs
 import { LikedPetsComponent } from './components/user-profile/profile-tabs/liked-pets/liked-pets.component';
 import { PostNewPetComponent } from './components/user-profile/profile-tabs/post-new-pet/post-new-pet.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from 'src/app/shared/components/file-upload/file-upload.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -32,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     CoreRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     NavBarComponent,

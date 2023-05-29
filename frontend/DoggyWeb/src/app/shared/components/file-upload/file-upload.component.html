@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="params.form" >
+        <img src="../../../../assets/icons/plus.svg" alt="" *ngIf="!fileName">
+        <p>{{fileName || params?.mainText || ''}}</p>
+        <input formControlName="{{params?.formControlName}}" (input)="onFileInput($event)" #input type="file" [accept]="params?.fileType || ''">
+      </form>
+      <p class="footer-text">{{params?.footerText || ''}}</p>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="row">
       <div class="col-6">
-        <!-- photo input -->
+        <app-file-upload [params]="fileUploadParams"></app-file-upload>
       </div>
       <div class="col-6">
         <form [formGroup]="postPetForm" (ngSubmit)="onPostpet()" class="post-pet-form">
