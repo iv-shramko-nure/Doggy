@@ -8,7 +8,7 @@
         <input formControlName="password" name="password" type="password">
         <label for="confirmPassword">Repeat Password</label>
         <input formControlName="confirmPassword" name="confirmPassword" type="password">
-        <button type="submit">Save Changes</button>
+        <button type="submit" [disabled]="!securityForm.valid">Save Changes</button>
       </form>
     </div>
     <div class="col-6">
