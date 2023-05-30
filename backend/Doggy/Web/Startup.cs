@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Web.Middlewares;
 
 namespace Web
 {
@@ -71,6 +72,9 @@ namespace Web
                 });
             });
 
+
+            services.AddSingleton<AuthenticationMiddleware>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -92,6 +96,10 @@ namespace Web
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseMiddleware<AuthenticationMiddleware>();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
