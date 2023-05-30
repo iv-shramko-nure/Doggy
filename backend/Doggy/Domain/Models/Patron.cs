@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Domain.Models
 {
-    public class Like
+    public class Patron
     {
         [Key]
-        public int LikeId { get; set; }
+        public Guid PatronId { get; set; }
 
         public int UserId { get; set; }
 
@@ -18,7 +19,7 @@ namespace Domain.Models
         public User User { get; set; }
 
         [JsonIgnore]
-        public Pet Pet { get; set; } 
+        public Pet Pet { get; set; }
 
         #endregion
     }

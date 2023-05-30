@@ -28,14 +28,12 @@ namespace Domain.Models
         [Required]
         public PetStatusEnum PetStatus { get; set; }
 
-        [Required]
-        public int LocationId { get; set; }
+        //[Required]
+        //public int LocationId { get; set; }
 
-        public int? UserId { get; set; }
+        //public int? UserId { get; set; }
 
-        public int? ShelterId { get; set; }
-        
-        public int? PatronId { get; set; }
+        public int ShelterId { get; set; }
 
         public string Description { get; set; }
 
@@ -43,17 +41,20 @@ namespace Domain.Models
 
         #region Relations
 
-        [JsonIgnore]
-        public Location Location { get; set; }
+        //[JsonIgnore]
+        //public Location Location { get; set; }
 
-        [JsonIgnore]
-        public  User User { get; set; }
-
-        [JsonIgnore]
-        public User Patron { get; set; }
+        //[JsonIgnore]
+        //public User User { get; set; }
 
         [JsonIgnore]
         public Shelter Shelter { get; set; }
+
+        [JsonIgnore]
+        public Patron Patron { get; set; }
+        
+        [JsonIgnore]
+        public PetPost PetPost { get; set; }
 
         [JsonIgnore]
         public List<Like> Likes { get; set; }

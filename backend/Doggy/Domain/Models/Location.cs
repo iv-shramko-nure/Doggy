@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 using Domain.Enums;
@@ -22,7 +23,7 @@ namespace Domain.Models
         #region Relations
 
         [JsonIgnore]
-        public User User { get; set; }
+        public List<User> Users { get; set; }
 
         [JsonIgnore]
         public Shelter Shelter { get; set; }

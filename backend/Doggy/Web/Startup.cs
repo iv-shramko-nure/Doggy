@@ -1,4 +1,5 @@
-using Data;
+using AutoMapper;
+using DAL.DbContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@ namespace Web
                 config.UseSqlServer(
                     Configuration.GetConnectionString("SqlServerDBConnection"));
             });
+
+            var builder = 
 
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
@@ -72,6 +75,21 @@ namespace Web
             });
 
             services.AddControllers();
+
+            #region Init Mapper Profiles
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddMaps(new[] {
+                "DAL.Models",
+                "BLL.Models"
+            });});
+
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            #endregion
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
