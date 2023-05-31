@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Domain.Enums;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Models
@@ -8,11 +11,14 @@ namespace Domain.Models
     public class User
     {
         [Key]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         [MaxLength(450)]
         public string IdentityUserId { get; set; }
+
+        [Required]
+        public UserRoleEnum RoleEnum { get; set; }
 
         //[Required]
         //public int LocationId { get; set; }

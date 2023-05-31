@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Common.Constants;
@@ -8,7 +9,7 @@ namespace Domain.Models
     public class Shelter
     {
         [Key]
-        public int ShelterId { get; set; }
+        public Guid ShelterId { get; set; }
 
         [Required]
         [MinLength(ValidationConstant.NameMinLength)]

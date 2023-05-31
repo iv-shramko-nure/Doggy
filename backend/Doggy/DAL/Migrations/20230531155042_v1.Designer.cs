@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230530201627_addedProfiles")]
-    partial class addedProfiles
+    [Migration("20230531155042_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,23 +21,122 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Domain.Models.Like", b =>
+                {
+                    b.Property<Guid>("LikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PetId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("PetId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("PetId1");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Patron", b =>
+                {
+                    b.Property<Guid>("PatronId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PatronId");
+
+                    b.HasIndex("PetId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Patrons");
+                });
+
+            modelBuilder.Entity("Domain.Models.Pet", b =>
+                {
+                    b.Property<Guid>("PetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Breed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Expense")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PetAge")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PetName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PetStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PetType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ShelterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PetId");
+
+                    b.HasIndex("ShelterId");
+
+                    b.ToTable("Pets");
+                });
+
+            modelBuilder.Entity("Domain.Models.PetPost", b =>
+                {
+                    b.Property<Guid>("PetPostId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PetPostId");
+
+                    b.HasIndex("PetId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PetPosts");
+                });
+
             modelBuilder.Entity("Domain.Models.Shelter", b =>
                 {
-                    b.Property<int>("ShelterId")
+                    b.Property<Guid>("ShelterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AspNetUserId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ShelterName")
                         .IsRequired()
@@ -50,29 +149,27 @@ namespace DAL.Migrations
 
                     b.HasKey("ShelterId");
 
-                    b.HasIndex("IdentityUserId");
-
                     b.ToTable("Shelters");
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AspNetUserId")
+                    b.Property<string>("IdentityUserId")
                         .IsRequired()
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleEnum")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("IdentityUserId");
+                    b.HasIndex("IdentityUserId")
+                        .IsUnique();
 
                     b.ToTable("UserProfiles");
                 });
@@ -273,20 +370,79 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Models.Shelter", b =>
+            modelBuilder.Entity("Domain.Models.Like", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
+                    b.HasOne("Domain.Models.Pet", "Pet")
+                        .WithMany("Likes")
+                        .HasForeignKey("PetId1");
 
-                    b.Navigation("IdentityUser");
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pet");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.Patron", b =>
+                {
+                    b.HasOne("Domain.Models.Pet", "Pet")
+                        .WithOne("Patron")
+                        .HasForeignKey("Domain.Models.Patron", "PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany("Patrons")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pet");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.Pet", b =>
+                {
+                    b.HasOne("Domain.Models.Shelter", "Shelter")
+                        .WithMany("Pets")
+                        .HasForeignKey("ShelterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shelter");
+                });
+
+            modelBuilder.Entity("Domain.Models.PetPost", b =>
+                {
+                    b.HasOne("Domain.Models.Pet", "Pet")
+                        .WithOne("PetPost")
+                        .HasForeignKey("Domain.Models.PetPost", "PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany("PetPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pet");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId");
+                        .HasForeignKey("IdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("IdentityUser");
                 });
@@ -340,6 +496,29 @@ namespace DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Models.Pet", b =>
+                {
+                    b.Navigation("Likes");
+
+                    b.Navigation("Patron");
+
+                    b.Navigation("PetPost");
+                });
+
+            modelBuilder.Entity("Domain.Models.Shelter", b =>
+                {
+                    b.Navigation("Pets");
+                });
+
+            modelBuilder.Entity("Domain.Models.User", b =>
+                {
+                    b.Navigation("Likes");
+
+                    b.Navigation("Patrons");
+
+                    b.Navigation("PetPosts");
                 });
 #pragma warning restore 612, 618
         }

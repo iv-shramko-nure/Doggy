@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Common.Constants;
@@ -9,7 +10,7 @@ namespace Domain.Models
     public class Pet
     {
         [Key]
-        public int PetId { get; set; }
+        public Guid PetId { get; set; }
 
         [Required]
         [MinLength(ValidationConstant.NameMinLength)]
@@ -33,7 +34,7 @@ namespace Domain.Models
 
         //public int? UserId { get; set; }
 
-        public int ShelterId { get; set; }
+        public Guid ShelterId { get; set; }
 
         public string Description { get; set; }
 

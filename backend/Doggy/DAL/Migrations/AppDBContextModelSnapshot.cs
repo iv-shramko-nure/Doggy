@@ -21,24 +21,26 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Domain.Models.Like", b =>
                 {
-                    b.Property<int>("LikeId")
+                    b.Property<Guid>("LikeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("PetId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LikeId");
 
-                    b.HasIndex("PetId");
+                    b.HasIndex("PetId1");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Like");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Domain.Models.Patron", b =>
@@ -47,11 +49,11 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PetId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PatronId");
 
@@ -60,15 +62,14 @@ namespace DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Patron");
+                    b.ToTable("Patrons");
                 });
 
             modelBuilder.Entity("Domain.Models.Pet", b =>
                 {
-                    b.Property<int>("PetId")
+                    b.Property<Guid>("PetId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Breed")
                         .IsRequired()
@@ -94,14 +95,14 @@ namespace DAL.Migrations
                     b.Property<int>("PetType")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShelterId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ShelterId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PetId");
 
                     b.HasIndex("ShelterId");
 
-                    b.ToTable("Pet");
+                    b.ToTable("Pets");
                 });
 
             modelBuilder.Entity("Domain.Models.PetPost", b =>
@@ -110,11 +111,11 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PetId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PetPostId");
 
@@ -123,15 +124,14 @@ namespace DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PetPost");
+                    b.ToTable("PetPosts");
                 });
 
             modelBuilder.Entity("Domain.Models.Shelter", b =>
                 {
-                    b.Property<int>("ShelterId")
+                    b.Property<Guid>("ShelterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
@@ -152,15 +152,17 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IdentityUserId")
                         .IsRequired()
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("RoleEnum")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
@@ -370,9 +372,7 @@ namespace DAL.Migrations
                 {
                     b.HasOne("Domain.Models.Pet", "Pet")
                         .WithMany("Likes")
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PetId1");
 
                     b.HasOne("Domain.Models.User", "User")
                         .WithMany("Likes")

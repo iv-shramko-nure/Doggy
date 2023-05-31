@@ -6,9 +6,9 @@ namespace Domain.Models
     {
         public Guid PetPostId { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public int PetId { get; set; }
+        public Guid PetId { get; set; }
 
         #region Relations
 
