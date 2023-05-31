@@ -22,6 +22,11 @@ namespace DAL.DbContext
 
         public DbSet<PetPost> PetPosts { get; set; }
 
+        public void Commit()
+        {
+            SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             MapModels(modelBuilder);
