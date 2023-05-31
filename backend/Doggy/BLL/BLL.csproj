@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BLL.Contracts\BLL.Contracts.csproj" />
     <ProjectReference Include="..\BLL.Models\BLL.Models.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />

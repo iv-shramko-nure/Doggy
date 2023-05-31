@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using BLL.Models.Models.PetModels;
 using Domain.Models;
 
@@ -12,6 +13,9 @@ namespace BLL.Models.Automapper
                 .ReverseMap();
 
             CreateMap<PetDTO, Pet>()
+                .ReverseMap();
+
+            CreateMap<List<Pet>, List<PetListItemDTO>>()
                 .ReverseMap();
         }
     }
