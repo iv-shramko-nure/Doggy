@@ -6,4 +6,9 @@
 
         public T data { get; set; }
     }
+
+    public class APIResponse
+    {
+        public bool IsSuccess { get; set; }
+    }
 }
