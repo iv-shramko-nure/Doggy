@@ -7,5 +7,7 @@ namespace DAL.Contracts
         Lazy<IPetRepository> Pets { get; }
 
         Lazy<IShelterRepository> Shelters { get; }
+
+        Lazy<IUserRepository> Users { get; }
     }
 }

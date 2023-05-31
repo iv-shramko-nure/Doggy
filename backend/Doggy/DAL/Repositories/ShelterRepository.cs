@@ -39,7 +39,6 @@ namespace DAL.Repositories
         public void Delete(Guid shelterId)
         {
             var shelter = _shelters.FirstOrDefault(s => s.ShelterId == shelterId);
-
             if (shelter is null)
                 throw new ArgumentException("INVALID_SHELTERID");
 
@@ -55,7 +54,6 @@ namespace DAL.Repositories
         public Shelter GetById(Guid shelterId)
         {
             var shelter = _shelters.FirstOrDefault(s => s.ShelterId == shelterId);
-
             if (shelter is null)
                 throw new ArgumentException("INVALID_SHELTERID");
 
