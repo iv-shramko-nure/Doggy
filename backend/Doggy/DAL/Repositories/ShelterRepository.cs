@@ -1,5 +1,7 @@
 ﻿using DAL.Contracts;
 using DAL.DbContext;
+using DAL.Models.Models.Filter;
+
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,6 +46,11 @@ namespace DAL.Repositories
 
             _shelters.Remove(shelter);
             _dbContext.Commit();
+        }
+
+        public IQueryable<Shelter> Find(ShelterFilter filter)
+        {
+            return filter.Filter(_shelters);
         }
 
         public IQueryable<Shelter> GetAll()

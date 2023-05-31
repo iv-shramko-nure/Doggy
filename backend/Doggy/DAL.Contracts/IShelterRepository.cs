@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using DAL.Models.Models.Filter;
+using Domain.Models;
 using System;
 using System.Linq;
 
@@ -9,6 +10,8 @@ namespace DAL.Contracts
         Guid Apply(Shelter shelter);
 
         void Delete(Guid shelterId);
+
+        IQueryable<Shelter> Find(ShelterFilter filter);
 
         IQueryable<Shelter> GetAll();
 

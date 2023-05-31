@@ -2,6 +2,8 @@
 using DAL.Contracts;
 using DAL.DbContext;
 using DAL.Models.Models;
+using DAL.Models.Models.Filter;
+
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -91,6 +93,11 @@ namespace DAL.Repositories
 
             _patrons.Remove(patron);
             _dbContext.Commit();
+        }
+
+        public IQueryable<User> Filter(UserFilter filter)
+        {
+            return filter.Filter(_users);
         }
 
         public IQueryable<User> GetAll()

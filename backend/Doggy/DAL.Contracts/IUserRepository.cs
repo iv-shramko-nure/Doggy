@@ -1,4 +1,5 @@
 ﻿using DAL.Models.Models;
+using DAL.Models.Models.Filter;
 using Domain.Models;
 using System;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace DAL.Contracts
         Guid Apply(User user);
 
         void Delete(Guid userId);
+
+        IQueryable<User> Find(UserFilter filter);
 
         IQueryable<User> GetAll();
 

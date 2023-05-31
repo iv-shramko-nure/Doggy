@@ -2,6 +2,8 @@
 using System.Linq;
 using DAL.Contracts;
 using DAL.DbContext;
+using DAL.Models.Models.Filter;
+
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,6 +46,11 @@ namespace DAL.Repositories
 
             _pets.Remove(pet);
             _dBContext.SaveChanges();
+        }
+
+        public IQueryable<Pet> Find(PetFilter filter)
+        {
+            return filter.Filter(_pets);
         }
 
         public IQueryable<Pet> GetAll()
