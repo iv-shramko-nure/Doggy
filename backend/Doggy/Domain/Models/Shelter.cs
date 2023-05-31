@@ -16,10 +16,6 @@ namespace Domain.Models
         [MaxLength(ValidationConstant.NameMaxLength)]
         public string ShelterName { get; set; }
 
-        //[Required]
-        //public int LocationId { get; set; }
-
-
         [MinLength(ValidationConstant.LinkMinLength)]
         [MaxLength(ValidationConstant.LinkMaxLength)]
         public string WebsiteURL { get; set; }
@@ -29,7 +25,19 @@ namespace Domain.Models
         public byte[] ProfileImage { get; set; }
 
         [Required]
+        public DateTime OpeningTime { get; set; }
+
+        [Required]
+        public DateTime ClosingTime { get; set; }
+
+        public string Description { get; set; }
+
+        [Required]
         public string Address { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
 
         #region Relations
 
