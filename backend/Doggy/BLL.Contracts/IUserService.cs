@@ -1,6 +1,6 @@
 ﻿using BLL.Models.Models.UserModels;
 using DAL.Models.Models;
-using Domain.Models;
+using DAL.Models.Models.Filter;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +10,7 @@ namespace BLL.Contracts
     {
         Guid Apply(UserDTO model);
 
-        void List();
+        List<UserListItemDTO> List(UserFilter filter);
 
         void Delete(Guid userId);
 
@@ -22,6 +22,6 @@ namespace BLL.Contracts
 
         void AddPatron(PatronDataModel model);
 
-        void RemovePatron(PatronDataModel model);
+        void RemovePatron(Guid patronId);
     }
 }

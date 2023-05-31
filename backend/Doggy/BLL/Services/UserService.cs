@@ -1,50 +1,74 @@
-﻿using BLL.Contracts;
+﻿using AutoMapper;
+using BLL.Contracts;
 using BLL.Models.Models.UserModels;
+using DAL.Contracts;
 using DAL.Models.Models;
+using DAL.Models.Models.Filter;
+using Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL.Services
 {
     public class UserService : IUserService
     {
+        private readonly Lazy<IUnitOfWork> _unitOfWork;
+        private readonly Lazy<IMapper> _mapper;
+
+        public UserService(
+            Lazy<IUnitOfWork> unitOfWork,
+            Lazy<IMapper> mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
         public void AddPatron(PatronDataModel model)
         {
-            throw new NotImplementedException();
+            _unitOfWork.Value.Users.Value.AddPatron(model);
         }
 
         public Guid Apply(UserDTO model)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Value.Map<User>(model);
+
+            return _unitOfWork.Value.Users.Value.Apply(user);
         }
 
         public void Delete(Guid userId)
         {
-            throw new NotImplementedException();
+            _unitOfWork.Value.Users.Value.Delete(userId);
         }
 
         public UserDTO GetById(Guid userId)
         {
-            throw new NotImplementedException();
+            var user = _unitOfWork.Value.Users.Value.GetById(userId);
+
+            return _mapper.Value.Map<UserDTO>(user);
         }
 
-        public void List()
+        public List<UserListItemDTO> List(UserFilter filter)
         {
-            throw new NotImplementedException();
+            var result = _unitOfWork.Value.Users.Value.Find(filter).ToList();
+            var resultModel = _mapper.Value.Map<List<UserListItemDTO>>(result);
+
+            return resultModel;
         }
 
         public void RemoveLike(LikeDataModel model)
         {
-            throw new NotImplementedException();
+            _unitOfWork.Value.Users.Value.DeleteLike(model);
         }
 
-        public void RemovePatron(PatronDataModel model)
+        public void RemovePatron(Guid patronId)
         {
-            throw new NotImplementedException();
+            _unitOfWork.Value.Users.Value.DeletePatron(patronId);
         }
 
         public void SetLike(LikeDataModel model)
         {
-            throw new NotImplementedException();
+            _unitOfWork.Value.Users.Value.SetLike(model);
         }
     }
 }

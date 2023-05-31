@@ -10,10 +10,14 @@ namespace BLL.Models.Automapper
         public PetProfile()
         {
             CreateMap<PetListItemDTO, Pet>()
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(dst => dst.ShelterName,
+                    opt => opt.MapFrom(src => src.Shelter.ShelterName));
 
             CreateMap<PetDTO, Pet>()
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(dst => dst.PatronName,
+                    opt => opt.MapFrom(src => src.Patron.User.FullName));
 
             CreateMap<List<Pet>, List<PetListItemDTO>>()
                 .ReverseMap();

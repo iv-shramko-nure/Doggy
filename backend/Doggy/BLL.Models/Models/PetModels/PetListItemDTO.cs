@@ -16,6 +16,6 @@ namespace BLL.Models.Models.PetModels
 
         public byte[] PetImage { get; set; }
 
-        public List<Like> Likes { get; set; } 
+        public List<Like> Likes { get; set; }
     }
 }
