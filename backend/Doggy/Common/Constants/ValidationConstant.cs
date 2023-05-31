@@ -2,6 +2,8 @@
 {
     public static class ValidationConstant
     {
+        public const int IdentityUserIdMaxLength = 450;
+
         public const int NameMinLength = 4;
         public const int NameMaxLength = 50;
 

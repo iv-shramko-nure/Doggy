@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Common.Constants;
 using Domain.Enums;
-
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Models
@@ -14,8 +14,12 @@ namespace Domain.Models
         public Guid UserId { get; set; }
 
         [Required]
-        [MaxLength(450)]
+        [MaxLength(ValidationConstant.IdentityUserIdMaxLength)]
         public string IdentityUserId { get; set; }
+
+        [Required]
+        [MinLength(ValidationConstant.NameMinLength)]
+        public string FullName { get; set; }
 
         [Required]
         public UserRoleEnum RoleEnum { get; set; }

@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Common.Configs;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
@@ -7,8 +8,19 @@ namespace DAL.DbContext
 {
     public class AppDBContext : IdentityDbContext
     {
-        public AppDBContext(DbContextOptions<AppDBContext> options)
-            : base(options) { }
+        public AppDBContext(ConnectionStringModel model)
+        : base(string.IsNullOrEmpty(model?.ConnectingString)
+            ? new DbContextOptionsBuilder()
+                .UseInMemoryDatabase("TestDb")
+                .Options
+            : SqlServerDbContextOptionsExtensions
+                .UseSqlServer(
+                    new DbContextOptionsBuilder(),
+                    model.ConnectingString
+                ).Options)
+        {
+            base.Database.EnsureCreated();
+        }
 
         public DbSet<User> UserProfiles { get; set; }
 

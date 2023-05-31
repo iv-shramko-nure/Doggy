@@ -1,4 +1,5 @@
 using AutoMapper;
+using Common.Configs;
 using DAL.DbContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -31,7 +32,8 @@ namespace Web
                     Configuration.GetConnectionString("SqlServerDBConnection"));
             });
 
-            var builder = 
+            var connectionString = Configuration.GetValue<string>("ConnectionString");
+            services.AddSingleton(new ConnectionStringModel(connectionString));
 
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
