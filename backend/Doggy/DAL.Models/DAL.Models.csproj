@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Automapper\" />
-    <Folder Include="Models\Pet\" />
+    <Folder Include="Models\Shelter\" />
+	<Folder Include="Models\Pet\" />
     <Folder Include="Params\" />
   </ItemGroup>
 
