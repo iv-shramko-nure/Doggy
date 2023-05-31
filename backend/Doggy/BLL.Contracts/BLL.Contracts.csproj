@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Braintree" Version="5.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BLL.Models\BLL.Models.csproj" />
     <ProjectReference Include="..\DAL.Models\DAL.Models.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />

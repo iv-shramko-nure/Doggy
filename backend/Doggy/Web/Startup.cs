@@ -35,6 +35,9 @@ namespace Web
             var connectionString = Configuration.GetValue<string>("ConnectionString");
             services.AddSingleton(new ConnectionStringModel(connectionString));
 
+            var braintreeGateway = Configuration.GetSection("BraintreeGateway").Get<BraintreeGatewayConfig>();
+            services.AddSingleton(braintreeGateway);
+
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
             {
                 config.Password.RequireDigit = false;

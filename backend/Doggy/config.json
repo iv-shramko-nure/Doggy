@@ -1,3 +1,9 @@
 {
+  "BraintreeGateway": {
+    "Environment": "Development",
+    "MerchantId": "dgf56ndbpxpmfjd7",
+    "PublicKey": "cxwdcbwfz69pyhtg",
+    "PrivateKey": "050801ee201a8fbd27791c988347f9e0"
+  },
   "ConnectionString": "Server=DESKTOP-GJAJF5V;Database=DoggyDb;Trusted_Connection=True;"
 }
