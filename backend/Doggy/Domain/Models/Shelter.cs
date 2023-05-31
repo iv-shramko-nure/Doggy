@@ -26,10 +26,12 @@ namespace Domain.Models
 
         public string CardNumber { get; set; }
 
-        #region Relations
+        public byte[] ProfileImage { get; set; }
 
-        //[JsonIgnore]
-        //public Location Location { get; set; }
+        [Required]
+        public string Address { get; set; }
+
+        #region Relations
 
         [JsonIgnore]
         public List<Pet> Pets { get; set; }

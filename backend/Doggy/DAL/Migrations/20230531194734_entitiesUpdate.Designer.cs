@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230531155042_v1")]
-    partial class v1
+    [Migration("20230531194734_entitiesUpdate")]
+    partial class entitiesUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,7 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("PetId1")
+                    b.Property<Guid>("PetId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
@@ -38,7 +35,7 @@ namespace DAL.Migrations
 
                     b.HasKey("LikeId");
 
-                    b.HasIndex("PetId1");
+                    b.HasIndex("PetId");
 
                     b.HasIndex("UserId");
 
@@ -73,6 +70,9 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Breed")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,6 +85,9 @@ namespace DAL.Migrations
 
                     b.Property<int>("PetAge")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("PetImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("PetName")
                         .IsRequired()
@@ -135,8 +138,15 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ShelterName")
                         .IsRequired()
@@ -158,10 +168,20 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityUserId")
                         .IsRequired()
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("RoleEnum")
                         .HasColumnType("int");
@@ -374,7 +394,9 @@ namespace DAL.Migrations
                 {
                     b.HasOne("Domain.Models.Pet", "Pet")
                         .WithMany("Likes")
-                        .HasForeignKey("PetId1");
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Models.User", "User")
                         .WithMany("Likes")

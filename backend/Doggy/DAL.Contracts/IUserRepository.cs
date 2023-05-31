@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using DAL.Models.Models;
+using Domain.Models;
 using System;
 using System.Linq;
 
@@ -13,5 +14,13 @@ namespace DAL.Contracts
         IQueryable<User> GetAll();
 
         User GetById(Guid userId);
+
+        void AddPatron(PatronDataModel patronModel);
+
+        void DeletePatron(Guid patronId);
+
+        void SetLike(LikeDataModel likeModel);
+
+        void DeleteLike(LikeDataModel likeModel);
     }
 }

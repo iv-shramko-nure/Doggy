@@ -1,5 +1,7 @@
-﻿using DAL.Contracts;
+﻿using AutoMapper;
+using DAL.Contracts;
 using DAL.DbContext;
+using DAL.Models.Models;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,13 +12,38 @@ namespace DAL.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly DbSet<User> _users;
+        private readonly DbSet<Patron> _patrons;
+        private readonly DbSet<Like> _likes;
+        private readonly DbSet<Pet> _pets;
         private readonly AppDBContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public UserRepository(AppDBContext dbContext)
+        public UserRepository(
+            AppDBContext dbContext,
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
             _users = _dbContext.UserProfiles;
+            _patrons = _dbContext.Patrons;
+            _likes = _dbContext.Likes;
         }
+
+        public void AddPatron(PatronDataModel patronModel)
+        {
+            var patron = _mapper.Map<Patron>(patronModel);
+
+            var user = _users.FirstOrDefault(u => u.UserId == patron.UserId);
+            if (user is null)
+                throw new ArgumentException("INVALID_USERID");
+
+            var pet = _pets.FirstOrDefault(p => p.PetId == patron.PetId);
+            if (pet is null)
+                throw new ArgumentException("INVALID_PETID");
+
+            _patrons.Add(patron);
+            _dbContext.Commit();
+        }   
 
         public Guid Apply(User user)
         {
@@ -46,6 +73,26 @@ namespace DAL.Repositories
             _dbContext.Commit();
         }
 
+        public void DeleteLike(LikeDataModel dataModel)
+        {
+            var like = _likes.FirstOrDefault(l => l.UserId == dataModel.UserId && l.PetId == dataModel.PetId);
+            if (like is null)
+                throw new ArgumentException("INVALID_PETID_OR_USERID");
+
+            _likes.Remove(like);
+            _dbContext.Commit();
+        }
+
+        public void DeletePatron(Guid patronId)
+        {
+            var patron = _patrons.FirstOrDefault(p => p.PatronId == patronId);
+            if (patron is null)
+                throw new ArgumentException("INVALID_PATRONID");
+
+            _patrons.Remove(patron);
+            _dbContext.Commit();
+        }
+
         public IQueryable<User> GetAll()
         {
             return _users.AsQueryable();
@@ -58,6 +105,22 @@ namespace DAL.Repositories
                 throw new ArgumentException("INVALID_USERID");
 
             return user;
+        }
+
+        public void SetLike(LikeDataModel likeModel)
+        {
+            var like = _mapper.Map<Like>(likeModel);
+
+            var user = _users.FirstOrDefault(u => u.UserId == like.UserId);
+            if (user is null)
+                throw new ArgumentException("INVALID_USERID");
+
+            var pet = _pets.FirstOrDefault(p => p.PetId == like.PetId);
+            if (pet is null)
+                throw new ArgumentException("INVALID_PETID");
+
+            _likes.Add(like);
+            _dbContext.Commit();
         }
     }
 }

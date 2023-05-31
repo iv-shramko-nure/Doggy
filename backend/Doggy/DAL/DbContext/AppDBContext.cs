@@ -8,19 +8,19 @@ namespace DAL.DbContext
 {
     public class AppDBContext : IdentityDbContext
     {
-        public AppDBContext(ConnectionStringModel model)
-        : base(string.IsNullOrEmpty(model?.ConnectingString)
-            ? new DbContextOptionsBuilder()
-                .UseInMemoryDatabase("TestDb")
-                .Options
-            : SqlServerDbContextOptionsExtensions
-                .UseSqlServer(
-                    new DbContextOptionsBuilder(),
-                    model.ConnectingString
-                ).Options)
-        {
-            base.Database.EnsureCreated();
-        }
+        //public AppDBContext(ConnectionStringModel model)
+        //: base(string.IsNullOrEmpty(model?.ConnectingString)
+        //    ? new DbContextOptionsBuilder()
+        //        .UseInMemoryDatabase("TestDb")
+        //        .Options
+        //    : SqlServerDbContextOptionsExtensions
+        //        .UseSqlServer(
+        //            new DbContextOptionsBuilder(),
+        //            model.ConnectingString
+        //        ).Options)
+        //{
+        //    base.Database.EnsureCreated();
+        //}
 
         public DbSet<User> UserProfiles { get; set; }
 
@@ -38,6 +38,9 @@ namespace DAL.DbContext
         {
             SaveChanges();
         }
+
+        public AppDBContext(DbContextOptions<AppDBContext> options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Automapper\" />
+    <Compile Remove="Models\Pet\**" />
+    <EmbeddedResource Remove="Models\Pet\**" />
+    <None Remove="Models\Pet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Shelter\" />
-	<Folder Include="Models\Pet\" />
     <Folder Include="Params\" />
   </ItemGroup>
 

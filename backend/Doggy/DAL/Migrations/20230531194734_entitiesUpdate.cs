@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class v1 : Migration
+    public partial class entitiesUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,7 +53,9 @@ namespace DAL.Migrations
                     ShelterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ShelterName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     WebsiteURL = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfileImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -172,7 +174,10 @@ namespace DAL.Migrations
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdentityUserId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    RoleEnum = table.Column<int>(type: "int", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleEnum = table.Column<int>(type: "int", nullable: false),
+                    ProfileImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,7 +202,9 @@ namespace DAL.Migrations
                     PetStatus = table.Column<int>(type: "int", nullable: false),
                     ShelterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Expense = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    Expense = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PetImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -216,18 +223,17 @@ namespace DAL.Migrations
                 {
                     LikeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PetId = table.Column<int>(type: "int", nullable: false),
-                    PetId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    PetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Likes", x => x.LikeId);
                     table.ForeignKey(
-                        name: "FK_Likes_Pets_PetId1",
-                        column: x => x.PetId1,
+                        name: "FK_Likes_Pets_PetId",
+                        column: x => x.PetId,
                         principalTable: "Pets",
                         principalColumn: "PetId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Likes_UserProfiles_UserId",
                         column: x => x.UserId,
@@ -326,9 +332,9 @@ namespace DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Likes_PetId1",
+                name: "IX_Likes_PetId",
                 table: "Likes",
-                column: "PetId1");
+                column: "PetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_UserId",

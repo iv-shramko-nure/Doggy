@@ -29,24 +29,17 @@ namespace Domain.Models
         [Required]
         public PetStatusEnum PetStatus { get; set; }
 
-        //[Required]
-        //public int LocationId { get; set; }
-
-        //public int? UserId { get; set; }
-
         public Guid ShelterId { get; set; }
 
         public string Description { get; set; }
 
         public decimal? Expense { get; set; }
 
+        public byte[] PetImage { get; set; }
+
+        public string Address { get; set; }
+
         #region Relations
-
-        //[JsonIgnore]
-        //public Location Location { get; set; }
-
-        //[JsonIgnore]
-        //public User User { get; set; }
 
         [JsonIgnore]
         public Shelter Shelter { get; set; }
