@@ -1,4 +1,5 @@
 ﻿using BLL.Contracts;
+using BLL.Models.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -99,6 +100,16 @@ namespace Web.Controllers
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
+
+            if (result.Succeeded)
+            {
+                var userIdentity = await _userManager.FindByEmailAsync(registerDTO.Email);
+                _userService.Apply(new UserDTO()
+                {
+                    IdentityUserId = userIdentity.Id
+                });
+            }
+            
             response.IsSuccess = result.Succeeded;
 
             return response;

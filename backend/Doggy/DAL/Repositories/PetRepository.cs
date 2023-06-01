@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AutoMapper;
 using DAL.Contracts;
 using DAL.DbContext;
 using DAL.Models.Models.Filter;
@@ -12,10 +13,14 @@ namespace DAL.Repositories
     {
         private readonly DbSet<Pet> _pets;
         private readonly AppDBContext _dBContext;
+        private readonly Lazy<IMapper> _mapper;
 
-        public PetRepository(AppDBContext dBContext)
+        public PetRepository(
+            AppDBContext dBContext,
+            Lazy<IMapper> mapper)
         {
             _dBContext = dBContext;
+            _mapper = mapper;
             _pets = dBContext.Pets;
         }
 
@@ -31,7 +36,8 @@ namespace DAL.Repositories
                 return pet.PetId;
             }
 
-            _pets.Update(pet);
+            oldPet = _mapper.Value.Map<Pet>(pet);
+            //_pets.Update(oldPet);
             _dBContext.Commit();
 
             return pet.PetId;
