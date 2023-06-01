@@ -12,7 +12,10 @@ namespace BLL.Models.Automapper
                 .ReverseMap();
 
             CreateMap<UserDTO, User>() 
-                .ReverseMap(); 
+                .ReverseMap();
+
+            CreateMap<UserDTO, UserRegisterDTO>()
+                .ReverseMap();
         }
     }
 }
