@@ -19,8 +19,8 @@ namespace BLL.Models.Automapper
                 .ForMember(dst => dst.PatronName,
                     opt => opt.MapFrom(src => src.Patron.User.FullName));
 
-            CreateMap<List<Pet>, List<PetListItemDTO>>()
-                .ReverseMap();
+            //CreateMap<List<Pet>, List<PetListItemDTO>>()
+            //    .ReverseMap();
         }
     }
 }

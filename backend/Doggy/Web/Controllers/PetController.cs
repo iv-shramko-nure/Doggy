@@ -20,7 +20,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("{petId}")]
-        public APIResponse<PetDTO> GetPreviewById(Guid petId)
+        public APIResponse<PetDTO> GetPetById(Guid petId)
         {
             var response = new APIResponse<PetDTO>();
             var pet = _petService.Value.GetById(petId);
@@ -42,7 +42,7 @@ namespace Web.Controllers
             return response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("delete/{petId}")]
         public APIResponse DeletePet(Guid petId)
         {

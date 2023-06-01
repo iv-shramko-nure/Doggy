@@ -39,8 +39,8 @@ namespace DAL.DbContext
             SaveChanges();
         }
 
-        public AppDBContext(DbContextOptions<AppDBContext> options)
-            : base(options) { }
+        //public AppDBContext(DbContextOptions<AppDBContext> options)
+        //    : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
