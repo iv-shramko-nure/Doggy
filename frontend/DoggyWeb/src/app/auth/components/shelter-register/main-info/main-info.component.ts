@@ -1,6 +1,10 @@
+import { AuthManagerService } from 'src/app/auth/services/auth-manager.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { confirmPasswordValidatorFn } from 'src/app/shared/helpers';
+import { RegisterData } from 'src/app/auth/models';
+import { ShelterMainInfo } from 'src/app/auth/components/shelter-register/models';
+import { ShelterRegisterService } from 'src/app/auth/components/shelter-register/shelter-register.service';
 
 @Component({
   selector: 'app-main-info',
@@ -11,6 +15,7 @@ export class MainInfoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private shelterRegisterService: ShelterRegisterService
   ) { }
 
   public mainInfoForm!: FormGroup;
@@ -20,6 +25,15 @@ export class MainInfoComponent implements OnInit {
   }
 
   public onSubmit() {
+    const registerData: ShelterMainInfo = {
+      email: this.mainInfoForm.controls['email'].value,
+      phoneNumber: this.mainInfoForm.controls['phoneNumber'].value,
+      website: this.mainInfoForm.controls['website'].value,
+    }
+
+    const password = this.mainInfoForm.controls['password'].value;
+
+    this.shelterRegisterService.setMainInfo(registerData, password);
   }
 
   private initForm() {
