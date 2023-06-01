@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BLL.Models.Models.PetModels
 {
@@ -10,6 +12,12 @@ namespace BLL.Models.Models.PetModels
         public string PetName { get; set; }
 
         public int PetAge { get; set; }
+        
+        public string Breed { get; set; }
+
+        public PetTypeEnum PetType { get; set; }
+
+        public PetStatusEnum PetStatus { get; set; }
 
         public Guid? ShelterId { get; set; }
 

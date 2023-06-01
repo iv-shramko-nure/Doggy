@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace DAL.Models.Models.Filter
 {
@@ -17,17 +16,15 @@ namespace DAL.Models.Models.Filter
 
             if (!string.IsNullOrWhiteSpace(FullName))
             {
-                query = (IIncludableQueryable<User, Microsoft.AspNetCore.Identity.IdentityUser>)query
-                    .Where(x => x.FullName.ToLower()
-                        .Contains(FullName.ToLower()));
+                query = query.Where(x => x.FullName.ToLower()
+                    .Contains(FullName.ToLower()));
             }
 
 
             if (!string.IsNullOrWhiteSpace(Email))
             {
-                query = (IIncludableQueryable<User, Microsoft.AspNetCore.Identity.IdentityUser>)query
-                    .Where(x => x.IdentityUser.Email.ToLower()
-                        .Contains(Email.ToLower()));
+                query = query.Where(x => x.IdentityUser.Email.ToLower()
+                    .Contains(Email.ToLower()));
             }
 
             return query;

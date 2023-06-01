@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using BLL.Contracts;
 using BLL.Models.Models.PetModels;
-using Microsoft.AspNetCore.Authorization;
+using DAL.Models.Models.Filter;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models;
 
@@ -50,6 +51,18 @@ namespace Web.Controllers
             _petService.Value.Delete(petId);
 
             response.IsSuccess = true;
+
+            return response;
+        }
+
+        [HttpGet("list")]
+        public APIResponse<List<PetListItemDTO>> Filter(PetFilter petFilter)
+        {
+            var response = new APIResponse<List<PetListItemDTO>>();
+            var data = _petService.Value.List(petFilter);
+
+            response.IsSuccess = true;
+            response.data = data;
 
             return response;
         }

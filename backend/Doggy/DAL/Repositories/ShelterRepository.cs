@@ -1,7 +1,7 @@
-﻿using DAL.Contracts;
+﻿using AutoMapper;
+using DAL.Contracts;
 using DAL.DbContext;
 using DAL.Models.Models.Filter;
-
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,10 +13,14 @@ namespace DAL.Repositories
     {
         private readonly DbSet<Shelter> _shelters;
         private readonly AppDBContext _dbContext;
+        private readonly Lazy<IMapper> _mapper;
 
-        public ShelterRepository(AppDBContext dbContext)
+        public ShelterRepository(
+            AppDBContext dbContext,
+            Lazy<IMapper> mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
             _shelters = _dbContext.Shelters;
         }
 
@@ -32,6 +36,9 @@ namespace DAL.Repositories
                 return shelter.ShelterId;
             }
 
+            _dbContext.Entry(oldShelter).State = EntityState.Detached;
+
+            oldShelter = _mapper.Value.Map<Shelter, Shelter>(shelter);
             _shelters.Update(shelter);
             _dbContext.Commit();
 
