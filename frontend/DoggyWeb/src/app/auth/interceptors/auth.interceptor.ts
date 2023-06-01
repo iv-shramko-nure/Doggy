@@ -42,9 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
         })
       )
     } else {
-      this.router.navigate(['auth', 'login']);
-
-      return EMPTY;
+      return next.handle(request)
     }
   }
 }
