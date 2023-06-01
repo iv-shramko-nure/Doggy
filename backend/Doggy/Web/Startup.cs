@@ -33,7 +33,7 @@ namespace Web
                     Configuration.GetConnectionString("SqlServerDBConnection"));
             });
 
-            var connectionString = Configuration.GetValue<string>("ConnectionString");
+            var connectionString = Configuration.GetValue<string>("SqlServerDBConnection");
             services.AddSingleton(new ConnectionStringModel(connectionString));
 
             var braintreeGateway = Configuration.GetSection("BraintreeGateway").Get<BraintreeGatewayConfig>();
@@ -107,12 +107,16 @@ namespace Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
+            //}
+
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
 
             app.UseCors();
 

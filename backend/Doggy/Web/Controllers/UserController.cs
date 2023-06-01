@@ -82,6 +82,8 @@ namespace Web.Controllers
             return response;
         }
 
+        [HttpPost]
+        [Route("like")]
         public APIResponse SetLike(LikeDataModel likeModel)
         {
             var response = new APIResponse();

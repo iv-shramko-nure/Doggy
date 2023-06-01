@@ -17,10 +17,10 @@ namespace Web
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddJsonFile(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(), "config.json"), optional: false, reloadOnChange: false);
-                })
+                //.ConfigureAppConfiguration((hostingContext, config) =>
+                //{
+                //    config.AddJsonFile(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).ToString(), "config.json"), optional: false, reloadOnChange: false);
+                //})
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureContainer<ContainerBuilder>(containerBuilder =>
                 {
