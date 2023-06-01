@@ -12,14 +12,14 @@ namespace DAL.Repositories
     public class PetRepository : IPetRepository
     {
         private readonly DbSet<Pet> _pets;
-        private readonly AppDBContext _dBContext;
+        private readonly AppDBContext _dbContext;
         private readonly Lazy<IMapper> _mapper;
 
         public PetRepository(
             AppDBContext dBContext,
             Lazy<IMapper> mapper)
         {
-            _dBContext = dBContext;
+            _dbContext = dBContext;
             _mapper = mapper;
             _pets = dBContext.Pets;
         }
@@ -28,17 +28,19 @@ namespace DAL.Repositories
         {
             var oldPet = _pets.FirstOrDefault(x => x.PetId == pet.PetId);
 
-            if (oldPet is null)
+            if(oldPet is null)
             {
                 _pets.Add(pet);
-                _dBContext.Commit();
+                _dbContext.Commit();
 
                 return pet.PetId;
             }
 
-            oldPet = _mapper.Value.Map<Pet>(pet);
-            //_pets.Update(oldPet);
-            _dBContext.Commit();
+            _dbContext.Entry(oldPet).State = EntityState.Detached;
+
+            oldPet = _mapper.Value.Map<Pet, Pet>(pet);
+            _pets.Update(oldPet);
+            _dbContext.Commit();
 
             return pet.PetId;
         }
@@ -50,7 +52,7 @@ namespace DAL.Repositories
                 throw new ArgumentException("INVALID_PETID");
 
             _pets.Remove(pet);
-            _dBContext.SaveChanges();
+            _dbContext.SaveChanges();
         }
 
         public IQueryable<Pet> Find(PetFilter filter)

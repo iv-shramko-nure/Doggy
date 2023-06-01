@@ -17,11 +17,11 @@ namespace DAL.Repositories
         private readonly DbSet<Like> _likes;
         private readonly DbSet<Pet> _pets;
         private readonly AppDBContext _dbContext;
-        private readonly IMapper _mapper;
+        private readonly Lazy<IMapper> _mapper;
 
         public UserRepository(
             AppDBContext dbContext,
-            IMapper mapper)
+            Lazy<IMapper> mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -32,7 +32,7 @@ namespace DAL.Repositories
 
         public void AddPatron(PatronDataModel patronModel)
         {
-            var patron = _mapper.Map<Patron>(patronModel);
+            var patron = _mapper.Value.Map<Patron>(patronModel);
 
             var user = _users.FirstOrDefault(u => u.UserId == patron.UserId);
             if (user is null)
@@ -58,6 +58,9 @@ namespace DAL.Repositories
                 return user.UserId;
             }
 
+            _dbContext.Entry(oldUser).State = EntityState.Detached;
+
+            oldUser = _mapper.Value.Map<User, User>(user);
             _users.Update(user);
             _dbContext.Commit();
 
@@ -115,7 +118,7 @@ namespace DAL.Repositories
 
         public void SetLike(LikeDataModel likeModel)
         {
-            var like = _mapper.Map<Like>(likeModel);
+            var like = _mapper.Value.Map<Like>(likeModel);
 
             var user = _users.FirstOrDefault(u => u.UserId == like.UserId);
             if (user is null)

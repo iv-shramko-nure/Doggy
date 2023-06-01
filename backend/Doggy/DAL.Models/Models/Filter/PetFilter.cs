@@ -12,39 +12,36 @@ namespace DAL.Models.Models.Filter
 
         public string ShelterName { get; set; }
 
+        public string Breed { get; set; }
+
         public PetTypeEnum? PetType { get; set; }
 
         public PetStatusEnum? PetStatus { get; set; }
 
         public IQueryable<Pet> Filter(DbSet<Pet> pets)
         {
-            var query = pets.Include(x => x.Shelter);
+            var query = pets.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(PetName))
             {
-                query = (IIncludableQueryable<Pet, Shelter>)query
-                    .Where(x => x.PetName.ToLower()
-                        .Contains(PetName.ToLower()));
+                query = query.Where(x => x.PetName.ToLower()
+                    .Contains(PetName.ToLower()));
             }
 
-            if (!string.IsNullOrWhiteSpace(ShelterName))
+            if (!string.IsNullOrWhiteSpace(Breed))
+                query = query.Where(x => x.Breed.ToLower() == Breed.ToLower());
+
+            if(!string.IsNullOrWhiteSpace(ShelterName))
             {
-                query = (IIncludableQueryable<Pet, Shelter>)query
-                    .Where(x => x.PetName.ToLower()
-                        .Contains(PetName.ToLower()));
+                query = query.Where(x => x.Shelter.ShelterName.ToLower()
+                    .Contains(ShelterName.ToLower()));
             }
 
             if (PetType.HasValue)
-            {
-                query = (IIncludableQueryable<Pet, Shelter>)query
-                    .Where(x => x.PetType == PetType.Value);
-            }
+                query = query.Where(x => x.PetType == PetType.Value);
 
             if (PetStatus.HasValue)
-            {
-                query = (IIncludableQueryable<Pet, Shelter>)query
-                    .Where(x => x.PetStatus == PetStatus.Value);
-            }
+                query = query.Where(x => x.PetStatus == PetStatus.Value);
 
             return query;
         }
