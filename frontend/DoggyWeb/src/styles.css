@@ -2,4 +2,32 @@
 
 :host {
   --black: #181818;
+  --purple: #6230F6;
+}
+
+.text-right {
+  text-align: end;
+}
+
+.text-purple {
+  color: #6230F6;
+}
+
+.hr-thick {
+  height: 5px;
+}
+
+.text-input {
+  border-radius: 16px;
+  border: none;
+  padding: 0.5em 1em;
+  border: 1px solid #181818;
+}
+
+.font-weight-main {
+  font-weight: 700;
+}
+
+.nav-link-active {
+  color: #6230F6;
 }
