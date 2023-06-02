@@ -14,6 +14,8 @@ import { PostNewPetComponent } from './components/user-profile/profile-tabs/post
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from 'src/app/shared/components/file-upload/file-upload.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
 
 
 
@@ -35,8 +37,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CoreRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
+  // providers: [
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  // ],
   exports: [
     NavBarComponent,
     FooterComponent
