@@ -1,3 +1,4 @@
+import { AuthManagerService } from 'src/app/auth/services/auth-manager.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authManagerService: AuthManagerService
+  ) { }
 
-  public isAuthenticated: boolean = true;
+  public isAuthenticated: boolean = false;
 
   public fullName: string = 'Ivan Shramko';
 
   public ngOnInit(): void {
+   this.authManagerService.isAuthenticated.subscribe(res => {
+    this.isAuthenticated = res;
+   })
   }
 
 }

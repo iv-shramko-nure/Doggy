@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthManagerService } from 'src/app/auth/services/auth-manager.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authManagerService: AuthManagerService
+  ) { }
 
-  ngOnInit(): void {
+  public isAuthenticated: boolean = false;
+
+  public ngOnInit(): void {
+   this.authManagerService.isAuthenticated.subscribe(res => {
+    this.isAuthenticated = res;
+   })
   }
 
 }
