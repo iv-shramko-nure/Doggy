@@ -1,4 +1,4 @@
-﻿namespace Web.Models
+﻿namespace BLL.Models.Models.UserModels
 {
     public class LoginDTO
     {

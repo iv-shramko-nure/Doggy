@@ -1,7 +1,11 @@
 ﻿using BLL.Contracts;
+using BLL.Models.Models.PetModels;
 using BLL.Models.Models.ShelterModels;
+using BLL.Services;
+using DAL.Models.Models.Filter;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using Web.Models;
 
 namespace Web.Controllers
@@ -48,6 +52,18 @@ namespace Web.Controllers
             _shelterService.Value.Delete(shelterId);
 
             response.IsSuccess = true;
+
+            return response;
+        }
+
+        [HttpGet("list")]
+        public APIResponse<List<ShelterListItemDTO>> Filter(ShelterFilter shelterFilter)
+        {
+            var response = new APIResponse<List<ShelterListItemDTO>>();
+            var data = _shelterService.Value.List(shelterFilter);
+
+            response.IsSuccess = true;
+            response.data = data;
 
             return response;
         }

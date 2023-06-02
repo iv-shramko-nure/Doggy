@@ -28,6 +28,7 @@ namespace DAL.Repositories
             _users = _dbContext.UserProfiles;
             _patrons = _dbContext.Patrons;
             _likes = _dbContext.Likes;
+            _pets = _dbContext.Pets;
         }
 
         public void AddPatron(PatronDataModel patronModel)

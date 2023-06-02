@@ -1,4 +1,5 @@
-﻿using BLL.Contracts;
+﻿using AutoMapper;
+using BLL.Contracts;
 using BLL.Models.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,18 +23,20 @@ namespace Web.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _config;
         private readonly IUserService _userService;
+        private readonly Lazy<IMapper> _mapper;
 
         public AuthController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             IConfiguration config,
-            IUserService userService
-        )
+            IUserService userService, 
+            Lazy<IMapper> mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
             _userService = userService;
+            _mapper = mapper;
         }
 
         [Route("login")]
@@ -96,7 +99,8 @@ namespace Web.Controllers
             IdentityUser user = new IdentityUser()
             {
                 Email = registerDTO.Email,
-                UserName = userName
+                UserName = userName,
+                PhoneNumber = registerDTO.PhoneNumber
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -104,10 +108,11 @@ namespace Web.Controllers
             if (result.Succeeded)
             {
                 var userIdentity = await _userManager.FindByEmailAsync(registerDTO.Email);
-                _userService.Apply(new UserDTO()
-                {
-                    IdentityUserId = userIdentity.Id
-                });
+
+                var userDTO = _mapper.Value.Map<UserDTO>(registerDTO);
+                userDTO.IdentityUserId = userIdentity.Id;
+
+                _userService.Apply(userDTO);
             }
             
             response.IsSuccess = result.Succeeded;
