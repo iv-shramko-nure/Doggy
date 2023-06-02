@@ -1,6 +1,6 @@
 import { TokenManagerService } from './../managers/token-manager.service';
 import { Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { RegisterData } from 'src/app/auth/models';
 import { AuthApiService } from 'src/app/auth/services/auth-api.service';
 
@@ -14,6 +14,9 @@ export class AuthManagerService {
     private tokenManagerService: TokenManagerService
   ) { }
 
+  private _isAuthenticated = new BehaviorSubject<boolean>(false);
+  public isAuthenticated = this._isAuthenticated.asObservable();
+
   public login(email: string, password: string): Observable<boolean> {
     return this.authApiService
       .login(email, password)
@@ -21,6 +24,7 @@ export class AuthManagerService {
         tap(response => {
           if (response.isSuccess) {
             this.tokenManagerService.setToken(<string>response.data)
+            this._isAuthenticated.next(true);
           }
         }),
         map(response => response.isSuccess)
@@ -42,9 +46,15 @@ export class AuthManagerService {
         tap(response => {
           if (response.isSuccess) {
             this.tokenManagerService.removeToken();
+            this._isAuthenticated.next(false);
           }
         }),
         map(response => response.isSuccess)
       );
+  }
+
+  public isAuthencicated() {
+    const token = this.tokenManagerService.getToken();
+    return !!token;
   }
 }

@@ -1,37 +1,39 @@
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 py-5">
       <div class="row">
-        <div class="col-1">
-          <span>arrow</span>
+        <div class="col-2 d-flex align-items-center">
+          <button class="btn" routerLink="/">
+            <img class="arrow" src="../../../../assets/icons/arrow-narrow-right.svg" alt="">
+          </button>
         </div>
-        <div class="col-11 text-right">
+        <div class="col-10 text-left">
           <h1>Create an Account</h1>
         </div>
       </div>
       <div class="row">
-        <h3>Few steps before getting new paw-pal</h3>
+        <p>Few steps before getting new paw-pal</p>
       </div>
       <div class="row">
         <div class="col">
-          <div class="row">
+          <div class="row mt-3">
             <div class="col">
-              <button>Log in with google</button>
+              <button style="width: 100%" class="btn btn-dark">Log in with google</button>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt-1">
             <div class="col">
-              <button>Log in with apple</button>
+              <button style="width: 100%" class="btn btn-dark">Log in with apple</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-5">
           <hr>
         </div>
         <div class="col-2 text-center">
-          <p>or</p>
+          <h3>or</h3>
         </div>
         <div class="col-5">
           <hr>
@@ -39,23 +41,23 @@
       </div>
       <div class="row">
         <div class="col">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-            <label for="fullName">Name and surname</label>
-            <input name="fullName" formControlName="fullName" type="text" placeholder="Type name here...">
-            <label for="email">Email</label>
-            <input name="email" formControlName="email" type="text" placeholder="Type name here...">
-            <label for="phoneNumber">Phone Number</label>
-            <input name="phoneNumber" formControlName="phoneNumber" type="phone" placeholder="Type name here...">
-            <label for="password">Password</label>
-            <input name="password" formControlName="password" type="password" placeholder="Type name here...">
-            <div>
-              <input formControlName="termsAndPolicies" type="checkbox" name="termsAndPolicies">
-              <label for="termsAndPolicies">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form mt-3 mb-3">
+            <label class="mt-3 mb-2" for="fullName">Name and surname</label>
+            <input class="text-input" name="fullName" formControlName="fullName" type="text" placeholder="Type name here...">
+            <label class="mt-3 mb-2" for="email">Email</label>
+            <input class="text-input" name="email" formControlName="email" type="text" placeholder="Type name here...">
+            <label class="mt-3 mb-2" for="phoneNumber">Phone Number</label>
+            <input class="text-input" name="phoneNumber" formControlName="phoneNumber" type="phone" placeholder="Type name here...">
+            <label class="mt-3 mb-2" for="password">Password</label>
+            <input class="text-input" name="password" formControlName="password" type="password" placeholder="Type name here...">
+            <div class="mt-3">
+              <input class="mb-2" formControlName="termsAndPolicies" type="checkbox" name="termsAndPolicies">
+              <label class="mb-2" for="termsAndPolicies">
                 I agree with
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank">Terms and Policies</a>
               </label>
             </div>
-            <button [disabled]="!registerForm.valid" type="submit">Sign up</button>
+            <button class="btn btn-dark" [disabled]="!registerForm.valid" type="submit">Sign up</button>
           </form>
         </div>
       </div>

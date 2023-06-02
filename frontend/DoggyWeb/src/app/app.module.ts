@@ -29,9 +29,9 @@ import { AuthInterceptor } from 'src/app/auth/interceptors/auth.interceptor';
     RouterModule,
     SharedModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
+  // providers: [
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

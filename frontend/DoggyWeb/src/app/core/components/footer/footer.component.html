@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container py-3">
   <div class="row d-flex justify-content-center">
     <div class="col-8">
       <div class="row">
         <div class="col-6 d-flex align-items-center">
-          <img src="" alt="">
+          <img class="mx-3" src="../../../../assets/icons/logo.svg" alt="">
           <span>Doggy</span>
         </div>
         <div class="col-6 d-flex align-items-center">
-          <a href="">Main</a>
-          <a href="">Donations</a>
-          <a href="">Pets</a>
-          <a href="">Shelters</a>
-          <a href="">Forum</a>
+          <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Main</a>
+          <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Donations</a>
+          <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Pets</a>
+          <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="{{isAuthenticated ? 'shelters' : '/'}}">Shelters</a>
+          <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Forum</a>
         </div>
       </div>
     </div>

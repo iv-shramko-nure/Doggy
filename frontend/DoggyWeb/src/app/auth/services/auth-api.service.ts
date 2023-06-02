@@ -19,17 +19,17 @@ export class AuthApiService {
       email: email,
       password: password
     }
-    const path = `${environment.apiUrl}/auth/login`
+    const path = `${environment.apiUrl}auth/login`
     return this.http.post<APIResponse<string>>(path, requestPayload);
   }
 
   public register(data: RegisterData) {
-    const path = `${environment.apiUrl}/auth/register`;
+    const path = `${environment.apiUrl}auth/register`;
     return this.http.post<APIResponse<string>>(path, data);
   }
 
   public logout() {
-    const path = `${environment.apiUrl}/auth/logout`;
+    const path = `${environment.apiUrl}auth/logout`;
     return this.http.get<APIResponse<string>>(path);
   }
 }
