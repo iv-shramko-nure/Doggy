@@ -14,7 +14,6 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`${environment.apiUrl}/test`).subscribe()
   }
 
 }
