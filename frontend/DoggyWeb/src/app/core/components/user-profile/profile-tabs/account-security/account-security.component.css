@@ -1,3 +1,113 @@
 .security-form {
   display: grid;
 }
+
+input{
+  /* Frame 33 */
+
+caret-color: #7F56F8;
+box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 14.5px 20px;
+gap: 4px;
+
+width: 410px;
+height: 56px;
+
+/* Colors/Base/00 */
+font-family: 'General Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 27px;
+/* identical to box height */
+
+
+/* Colors/Others Color/Stone/800 */
+
+color: #403E37;
+background: #FFFFFF;
+/* Colors/Others Color/Stone/300 */
+
+border: 2px solid #C1BCAD;
+border-radius: 8px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+}
+
+label{
+  font-family: 'General Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+/* Colors/Others Color/Stone/400 */
+
+color: #B2AB98;
+
+}
+
+button {
+  transition-duration: 0.2s;
+  /* Button Primary or Secondary Animated */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  gap: 4px;
+  /* Details 18/18px Semibold */
+
+  font-family: "General Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+
+  /* Primary/Secondary */
+  color: #f7f5ff;
+  /* Colors/Base/100 */
+
+  background: #181818;
+  border-radius: 8px;
+}
+button:hover {
+  background: #3d3d3d;
+}
+
+h6{
+  font-family: 'Chillax';
+font-style: normal;
+font-weight: 600;
+font-size: 36px;
+line-height: 50px;
+text-align: left;
+
+color: rgba(24, 24, 24, 0.75);
+}
+
+p{
+  font-family: 'General Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 148.5%;
+color: #555249;
+}
