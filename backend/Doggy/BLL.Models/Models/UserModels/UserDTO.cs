@@ -15,6 +15,8 @@ namespace BLL.Models.Models.UserModels
 
         public string Address { get; set; }
 
+        public string FullName { get; set; }
+
         public byte[] ProfileImage { get; set; }
 
         public string IdentityUserId { get; set; }

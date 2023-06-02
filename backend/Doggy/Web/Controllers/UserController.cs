@@ -2,9 +2,11 @@
 using BLL.Models.Models.UserModels;
 using Braintree;
 using DAL.Models.Models;
+using DAL.Models.Models.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using Web.Models;
 
 namespace Web.Controllers
@@ -46,7 +48,7 @@ namespace Web.Controllers
             return response;
         }
 
-        [HttpDelete("delete/{petId}")]
+        [HttpDelete("delete/{userId}")]
         public APIResponse Delete(Guid userId)
         {
             var response = new APIResponse();
@@ -75,6 +77,8 @@ namespace Web.Controllers
             var response = new APIResponse();
             _userService.Value.RemoveLike(likeModel);
 
+            response.IsSuccess = true;
+
             return response;
         }
 
@@ -83,6 +87,8 @@ namespace Web.Controllers
         {
             var response = new APIResponse();
             _userService.Value.RemovePatron(patronId);
+
+            response.IsSuccess = true;
 
             return response;
         }
@@ -124,7 +130,7 @@ namespace Web.Controllers
             return response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("get-client-token")]
         public APIResponse<string> GetClientToken()
         {
@@ -137,6 +143,18 @@ namespace Web.Controllers
 
             response.IsSuccess = true;
             response.data = clientToken;
+
+            return response;
+        }
+
+        [HttpGet("list")]
+        public APIResponse<List<UserListItemDTO>> Filter(UserFilter userFilter)
+        {
+            var response = new APIResponse<List<UserListItemDTO>>();
+            var data = _userService.Value.List(userFilter);
+
+            response.IsSuccess = true;
+            response.data = data;
 
             return response;
         }

@@ -8,9 +8,9 @@ namespace BLL.Models.Models.ShelterModels
 
         public string Address { get; set; } 
 
-        public DateTime OpeningHour { get; set; }   
+        public DateTime OpeningTime { get; set; }   
 
-        public DateTime ClosingHour { get; set; }
+        public DateTime ClosingTime { get; set; }
 
         public byte[] ProfileImage { get; set; }
 

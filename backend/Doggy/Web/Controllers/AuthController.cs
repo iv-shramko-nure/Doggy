@@ -99,7 +99,8 @@ namespace Web.Controllers
             IdentityUser user = new IdentityUser()
             {
                 Email = registerDTO.Email,
-                UserName = userName
+                UserName = userName,
+                PhoneNumber = registerDTO.PhoneNumber
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -108,7 +109,7 @@ namespace Web.Controllers
             {
                 var userIdentity = await _userManager.FindByEmailAsync(registerDTO.Email);
 
-                var userDTO = _mapper.Value.Map<UserDTO>(userIdentity);
+                var userDTO = _mapper.Value.Map<UserDTO>(registerDTO);
                 userDTO.IdentityUserId = userIdentity.Id;
 
                 _userService.Apply(userDTO);
