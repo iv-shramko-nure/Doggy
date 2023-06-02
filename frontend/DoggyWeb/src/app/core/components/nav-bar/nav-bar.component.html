@@ -1,22 +1,22 @@
-<div class="container">
+<div class="container py-3">
   <div class="row">
     <div class="col-4">
-      <img src="" alt="">
+      <img src="../../../../assets/icons/logo.svg" alt="">
     </div>
     <div class="col-4 d-flex align-items-center">
-      <a routerLink="/">Main</a>
-      <a href="">Donations</a>
-      <a href="">Pets</a>
-      <a routerLink="shelters">Shelters</a>
-      <a href="">Forum</a>
+      <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Main</a>
+      <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Donations</a>
+      <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Pets</a>
+      <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="{{isAuthenticated ? 'shelters' : '/'}}">Shelters</a>
+      <a class="nav-link px-1" routerLinkActive="nav-link-active" routerLink="/">Forum</a>
     </div>
     <div class="col-4" *ngIf="!isAuthenticated">
-      <button>Log in</button>
-      <button>Sign up</button>
+      <button class="btn btn-dark me-2" routerLink="auth/login">Log in</button>
+      <button class="btn btn-dark" routerLink="auth/register">Sign up</button>
     </div>
     <div class="col-4" *ngIf="isAuthenticated">
-      <button routerLink="profile">
-        <span>{{fullName}}</span>
+      <button style="border: 2px solid black;" class="btn d-flex align-items-center px-4" routerLink="profile">
+        <span class="me-1">{{fullName}}</span>
         <img src="../../../../assets/icons/user.svg" alt="">
       </button>
     </div>

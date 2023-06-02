@@ -43,10 +43,10 @@
                   placeholder="Type name here...">
                 <div class="row">
                   <div class="col-6">
-                    <button type="reset">Back to menu</button>
+                    <button type="reset" routerLink="../../">Back to menu</button>
                   </div>
                   <div class="col-6">
-                    <button type="submit" [disabled]="!mainInfoForm.valid">Next step</button>
+                    <button type="submit" routerLink="description" [disabled]="!mainInfoForm.valid">Next step</button>
                   </div>
                 </div>
               </form>
