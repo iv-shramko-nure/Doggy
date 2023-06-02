@@ -1,3 +1,4 @@
+import { AuthManagerService } from 'src/app/auth/services/auth-manager.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,15 +10,19 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authManagerService: AuthManagerService
   ) { }
 
   ngOnInit(): void {
   }
 
-  logout(){
-    console.log('logout')
-    this.router.navigate(['auth']);
+  logout() {
+    this.authManagerService.logout().subscribe(res => {
+      if (res) {
+        this.router.navigate(['auth']);
+      }
+    })
   }
 
 }
