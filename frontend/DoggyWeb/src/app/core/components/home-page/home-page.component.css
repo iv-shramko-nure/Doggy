@@ -1,0 +1,73 @@
+.searchbar{
+    /* Frame 33 */
+
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 20px 20px 40px;
+gap: 8px;
+
+position: relative;
+width: 704px;
+height: 64px;
+
+/* Colors/Others Color/Violet/25 */
+
+background: #F1ECFE;
+border: 2px solid #000000;
+border-radius: 50px;
+font-family: 'General Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 32px;
+text-align: center;
+
+/* Colors/Others Color/Gray/200 */
+
+color: #B3B8C2;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+button {
+    transition-duration: 0.2s;
+    /* Button Primary or Secondary Animated */
+  
+    /* Auto layout */
+  height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    gap: 4px;
+    /* Details 18/18px Semibold */
+  
+    font-family: "General Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+  
+    /* Primary/Secondary */
+    color: #f7f5ff;
+    /* Colors/Base/100 */
+  
+    background: #181818;
+    border-radius: 8px;
+  }
+  button:hover {
+    background: #3d3d3d;
+  }

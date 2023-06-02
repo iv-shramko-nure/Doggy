@@ -6,7 +6,7 @@
         <p>{{fileName || params?.mainText || ''}}</p>
         <input formControlName="{{params?.formControlName}}" (input)="onFileInput($event)" #input type="file" [accept]="params?.fileType || ''">
       </form>
-      <p class="footer-text">{{params?.footerText || ''}}</p>
+      <p class="footer-text mt-3">{{params?.footerText || ''}}</p>
     </div>
   </div>
 </div>

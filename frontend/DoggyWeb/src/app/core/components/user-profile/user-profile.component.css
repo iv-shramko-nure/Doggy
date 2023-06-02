@@ -1,3 +1,75 @@
 .profile-menu {
   display: grid;
 }
+
+h1 {
+  font-family: "Chillax";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 67px;
+}
+h3 {
+  font-family: "General Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 49px;
+  color: #000000;
+}
+h4 {
+  font-family: "General Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 43px;
+
+  color: rgba(0, 0, 0, 0.4);
+}
+span{
+  font-family: 'General Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 32px;
+
+/* Colors/Base/100 */
+color: #181818;
+}
+
+button img{
+width: 32px;
+height: 32px;
+margin-right: 20px;
+}
+button div{
+  height: 100%;
+  width: 20px;
+}
+button{
+  
+border: 0cm;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+background: none;
+width: 339px;
+height: 64px;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}
+.active{
+  background: #F1ECFE;
+}
+
+.active div{
+  background: #7F56F8;
+}
